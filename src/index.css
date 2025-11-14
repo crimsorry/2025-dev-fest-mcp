@@ -56,6 +56,10 @@ h4 {
   color: rgba(255, 255, 255, 0.9);
 }
 
+.app {
+  max-width: 900px;
+}
+
 .section h3 {
   color: #ea4335;
   font-weight: 700;
@@ -91,7 +95,7 @@ h4 {
   min-height: 450px;
   display: flex;
   flex-direction: column;
-  min-width: 450px;
+  min-width: 400px;
   transition: all 0.3s ease;
 }
 

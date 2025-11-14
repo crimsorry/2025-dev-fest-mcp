@@ -3,7 +3,7 @@ import TextGenerator from "./before/TextGenerator";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <h1>🚀 코딩 에이전트를 똑똑하게 사용하기 with MCP 서버</h1>
       <div className="info-box">
         <p>
