@@ -44,7 +44,7 @@ function App() {
       <div className="container">
         <div className="section">
           <h3>
-            Before <span className="badge v18">useState 사용</span>
+            Before <span className="badge v18">React 18</span>
           </h3>
           <ProfileFormBefore />
           <div
@@ -59,13 +59,13 @@ function App() {
 
         <div className="section after">
           <h3>
-            After <span className="badge v19">useActionState</span>
+            After <span className="badge v19">React 19</span>
           </h3>
           <div
             className="info-box"
             style={{ marginTop: "1rem", fontSize: "0.9em" }}
           >
-            <p>✅ useActionState로 통합 상태 관리</p>
+            <p>✅ 최신 React 19를 이용한 상태 관리</p>
             <p>✅ 자동 pending 상태 관리</p>
             <p>✅ 선언적 폼 처리</p>
           </div>
