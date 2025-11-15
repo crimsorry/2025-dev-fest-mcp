@@ -1,5 +1,16 @@
-// TextGenerator.jsx (기초 실습 - genai 적용 전)
+// TextGenerator.jsx (기초 실습 - genai 적용 후)
 import { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// API 키를 환경 변수에서 가져옵니다. (Vite의 경우 `import.meta.env.VITE_...`)
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+if (!API_KEY) {
+  throw new Error("VITE_GEMINI_API_KEY 환경 변수가 설정되지 않았습니다.");
+}
+
+// GenAI 클라이언트 및 모델 초기화
+const genAI = new GoogleGenerativeAI(API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 export default function TextGenerator() {
   const [prompt, setPrompt] = useState("");
@@ -18,17 +29,22 @@ export default function TextGenerator() {
     setResult("");
 
     try {
-      // TODO: 여기에 실제 AI 텍스트 생성 로직을 구현해야 합니다.
-      // 현재는 mock 응답을 반환합니다.
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // google/genai 라이브러리를 사용하여 텍스트 생성
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
 
-      setResult(
-        `[Mock Response]\n입력하신 프롬프트: "${prompt}"\n\n` +
-          `실제 구현에서는 여기에 AI가 생성한 텍스트가 표시됩니다.\n` +
-          `Context7을 이용해 google/genai 라이브러리를 학습하고 이 부분을 구현해보세요!`
-      );
+      setResult(text);
     } catch (err) {
-      setError(err.message || "텍스트 생성 중 오류가 발생했습니다.");
+      console.error("Gemini API Error:", err);
+      let errorMessage = "텍스트 생성 중 오류가 발생했습니다.";
+      if (err.message.includes("API key not valid")) {
+        errorMessage =
+          "API 키가 유효하지 않습니다. 환경 변수를 다시 확인해주세요.";
+      } else if (err.message.includes("429")) {
+        errorMessage = "API 요청 할당량이 초과되었습니다. 잠시 후 다시 시도해주세요.";
+      }
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -68,11 +84,11 @@ export default function TextGenerator() {
           style={{ marginTop: "1rem", fontSize: "0.9em" }}
         >
           <p>
-            <strong>📝 실습 과제:</strong>
+            <strong>✨ GenAI 적용 완료!</strong>
             <br />
-            Context7을 이용해서 google/genai 라이브러리를 학습하고
+            이제 실제 생성형 AI가 여러분의 프롬프트를 처리합니다.
             <br />
-            텍스트 생성을 생성형 AI를 사용하도록 변경해보세요!
+            API 키가 올바르게 설정되었는지 확인해주세요.
           </p>
         </div>
       </div>
