@@ -1,5 +1,6 @@
 import ProfileFormBefore from "./before/ProfileForm";
-import TextGenerator from "./before/TextGenerator";
+import ProfileFormAfter from "./after/ProfileForm";
+import TextGenerator from "./after/TextGenerator";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <h3>
             After <span className="badge v19">React 19</span>
           </h3>
+          <ProfileFormAfter />
           <div
             className="info-box"
             style={{ marginTop: "1rem", fontSize: "0.9em" }}
